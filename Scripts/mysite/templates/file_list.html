@@ -1,0 +1,55 @@
+<!--
+FILE: file_list.html
+Zach Dilliha, WKU 2020
+CS 396
+
+This page is for listing off the various files uploaded to the website
+-->
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Files</li>
+{% endblock %}
+
+{% block content %}
+  <h2>Files</h2>
+
+  <p>
+    <a href="{% url 'upload_file' %}" class="btn btn-primary">Upload</a>
+  </p>
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Download</th>
+        <!-- if the user is admin/superuser, they can see the column to delete files-->
+        {% if user.is_superuser %}
+          <th>Delete</th>
+        {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+            {% for file in files %}
+            <tr>
+              <td>{{ file.title }}</td>
+              <!--Here the user is directed to a link containing the file where they can view/download it in another tab-->
+              <td>
+                <a href="{{ file.pdf.url }}" class ="btn btn-primary btn-sm" target="_blank">
+                  Download File
+                </a>
+              </td>
+              <td>
+                <form method="post" action="{% url 'delete_file' file.pk %}">
+                  {% csrf_token %}
+                  <!--if the user is admin/superuser, they can delete files -->
+                  {% if  user.is_superuser %}
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                  {% endif %}
+                  </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+  </table>
+{% endblock %}

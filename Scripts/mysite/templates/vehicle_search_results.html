@@ -1,0 +1,52 @@
+<!-- vehicle_search_results.html -->
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'database_home' %}">Database</a></li>
+  <li class="breadcrumb-item active">Vehicles</li>
+{% endblock %}
+
+{% block content %}
+  <h2> Vehicles </h2>
+  <p>
+    <form action="{% url 'vehicle_search_results' %}" method="get">
+      <input name="q" type="text" placeholder="Search Vehicles">
+    </form>
+  </p>
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Automaker</th>
+        <th>Trim</th>
+        <th>Engine Family</th>
+        <th>Engine Code</th>
+        <th>Engine Model</th>
+        <th>Manufacturer</th>
+        <th>Part Name</th>
+        <th>Part Description</th>
+        <th>Part Number</th>
+        <th>Model Year</th>
+        <th>Sensor</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vehicle in object_list %}
+      <tr>
+        <td>{{ vehicle.automaker }}</td>
+        <td>{{ vehicle.trim }}</td>
+        <td>{{ vehicle.engine_family }}</td>
+        <td>{{ vehicle.engine_code }}</td>
+        <td>{{ vehicle.engine_model }}</td>
+        <td>{{ vehicle.manufacturer }}</td>
+        <td>{{ vehicle.part_name }}</td>
+        <td>{{ vehicle.part_desc }}</td>
+        <td>{{ vehicle.part_num }}</td>
+        <td>{{ vehicle.model_year }}</td>
+        <td>{{ vehicle.sensor }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+{% endblock %}

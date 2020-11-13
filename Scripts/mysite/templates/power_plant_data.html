@@ -1,0 +1,51 @@
+<!-- powerplant_search_results.html -->
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'database_home' %}">Database</a></li>
+  <li class="breadcrumb-item active">Power Plants</li>
+{% endblock %}
+
+{% block content %}
+  <h2> Power Plants </h2>
+
+  <p>
+    <form action="{% url 'power_plant_data' %}" method="get">
+      <input name="q" type="text" placeholder="Search Power Plants">
+    </form>
+  </p>
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>State</th>
+        <th>SO2</th>
+        <th>NOx</th>
+        <th>CO2</th>
+        <th>Hg</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for powerplant in object_list %}
+      <tr>
+        <td>{{ powerplant.name }}</td>
+        <td>{{ powerplant.state }}</td>
+        <td>{{ powerplant.so2 }}</td>
+        <td>{{ powerplant.nox }}</td>
+        <td>{{ powerplant.co2 }}</td>
+        <td>{{ powerplant.hg }}</td>
+        <td>{{ powerplant.lat }}</td>
+        <td>{{ powerplant.long }}</td>
+
+
+
+
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+{% endblock %}

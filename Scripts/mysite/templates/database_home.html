@@ -1,0 +1,23 @@
+<!--database_home.html -->
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Database Home</li>
+  {% endblock %}
+
+
+  {% block content %}
+
+  <p>
+    <a href="{% url 'city_search_results' %}" class="btn btn-primary">Cities</a>
+  </p>
+
+  <p>
+    <a href="{% url 'vehicle_search_results' %}" class="btn btn-primary">Vehicles</a>
+  </p>
+
+  <p>
+    <a href="{% url 'powerplant_search_results' %}" class="btn btn-primary">Power Plants</a>
+  </p>
+
+  {% endblock %}
