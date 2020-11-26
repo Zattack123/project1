@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 
+from django_matplotlib import MatplotlibFigureField
 import matplotlib.plyplot as plt
 import io
 import urllib, base64
@@ -49,13 +50,13 @@ class PowerPlantSearchResultsView(ListView):
 
 
 #def graphtest(request):
-#    plt.plot(range(10))
-#    fig = plt.gcf()
-#    buf = io.BytesIO()
-#    fig.savefig(buf,format='png')
-#    buf.seek(0)
-#    string = base64.b64encode(buf.read())
-#    uri = urllib.parse.quote(string)
-#    return render(request,'graph.html',{'data':uri})
+    #plt.plot(range(10))
+    #fig = plt.gcf()
+    #buf = io.BytesIO()
+    #fig.savefig(buf,format='png')
+    #buf.seek(0)
+    #string = base64.b64encode(buf.read())
+    #uri = urllib.parse.quote(string)
+    #return render(request,'graph.html',{'data':uri})
 
 # Create your views here.
