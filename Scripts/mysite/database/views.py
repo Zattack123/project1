@@ -3,8 +3,19 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 
-
 from .models import City, Vehicle, PowerPlant
+from .utils import get_plot
+
+class GraphView(TemplateView):
+    template_name = 'graph.html'
+
+    def graph_view(request):
+        qs = City.objects.all;
+        x = [x.name for x in qs]
+        y = [y.c_co2 for y in qs]
+        chart = get_plot(x,y)
+        return render(request, 'graph.html', {'chart': chart})
+
 
 class DatabasePageView(TemplateView):
     model = PowerPlant
