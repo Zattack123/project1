@@ -11,15 +11,3 @@ def get_graph():
     graph = graph.decode('utf-8')
     buffer.close()
     return graph
-
-def get_plot(x,y):
-    plt.switch_backend('AGG')
-    plt.figure(figsize=(10,5))
-    plt.title('Example Chart Please Work')
-    plt.bar(x,y)
-    plt.xticks(rotation=45)
-    plt.xlabel("City Name")
-    plt.ylabel('CO2')
-    plt.tight_layout();
-    graph = get_graph()
-    return graph

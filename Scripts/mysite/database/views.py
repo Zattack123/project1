@@ -6,14 +6,14 @@ from django.http import JsonResponse, Http404
 from django.urls import reverse
 
 
-import matplotlib.pyplot as plot
+import matplotlib.pyplot as plt
 import numpy as np
 from io import BytesIO
 import base64
 
 
 from .models import City, Vehicle, PowerPlant
-from .utils import get_plot
+from .utils import get_graph
 
 
 class DatabasePageView(TemplateView):
@@ -60,6 +60,13 @@ def c02_graph(request):
     qs = City.objects.all();
     x = [x.name for x in qs]
     y = [y.c_co2 for y in qs]
-    
-    chart = get_plot(x,y)
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(10,5))
+    plt.title('Example Chart Please Work')
+    plt.bar(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("City Name")
+    plt.ylabel('CO2')
+    plt.tight_layout();
+    chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
