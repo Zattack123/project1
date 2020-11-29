@@ -2,22 +2,18 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q, Sum
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
+from django.urls import reverse
+
+
+import matplotlib.pyplot as plot
+import numpy as np
+from io import BytesIO
+import base64
+
 
 from .models import City, Vehicle, PowerPlant
 from .utils import get_plot
-
-
-class GraphView(TemplateView):
-    template_name = 'graph.html'
-
-
-    def graph_view(request):
-        qs = City.objects.all;
-        x = [x.name for x in qs]
-        y = [y.c_co2 for y in qs]
-        chart = get_plot(x,y)
-        return render(request, 'graph.html', {'chart': chart})
 
 
 class DatabasePageView(TemplateView):
@@ -60,4 +56,10 @@ class PowerPlantSearchResultsView(ListView):
 
 
 
-# Create your views here.
+def c02_graph(request):
+    qs = City.objects.all();
+    x = [x.name for x in qs]
+    y = [y.c_co2 for y in qs]
+    
+    chart = get_plot(x,y)
+    return render(request, 'graph.html', {'chart': chart})

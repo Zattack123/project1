@@ -16,10 +16,10 @@ def get_plot(x,y):
     plt.switch_backend('AGG')
     plt.figure(figsize=(10,5))
     plt.title('Example Chart Please Work')
-    plt.plot(x,y)
+    plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("City Name")
-    ply.ylabel('CO2')
+    plt.ylabel('CO2')
     plt.tight_layout();
     graph = get_graph()
     return graph

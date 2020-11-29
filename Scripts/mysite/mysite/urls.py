@@ -68,7 +68,7 @@ urlpatterns = [
     url(r'database/vehicles/', db_views.VehicleSearchResultsView.as_view(), name='vehicle_search_results'),
     url(r'database/powerplant/', db_views.PowerPlantSearchResultsView.as_view(), name='powerplant_search_results'),
 
-    url(r'^graphtest/', db_views.GraphView.as_view(), name='graphtest'),
+    url(r'^graphtest/', db_views.c02_graph, name='graphtest'),
 
     #WIP
 #    url(r'^boards/(?P<board_pk>\d+)/topics/(?P<pk>\d+)', views.delete_topic, name='delete_topic'),
