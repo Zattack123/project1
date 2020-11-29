@@ -59,10 +59,10 @@ class PowerPlantSearchResultsView(ListView):
 def c02_graph(request):
     qs = City.objects.all();
     x = [x.name for x in qs]
-    y = [y.c_co2 for y in qs]
+    y = [y.max_c_co2 + y.min_c_co2 for y in qs]
     plt.switch_backend('AGG')
     plt.figure(figsize=(10,5))
-    plt.title('Example Chart Please Work')
+    plt.title('CO2 Conectration Per City')
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("City Name")
@@ -70,3 +70,22 @@ def c02_graph(request):
     plt.tight_layout();
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
+
+
+
+def pollution_concentration(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    #city = City.objects.get(name='Lexington')[:0]
+    data = list((city.c_co))
+    labels = list(("CO"))
+    data.append(city.c_co2)
+    labels.append("C02")
+    data.append(city.c_hc)
+    labels.append("HC")
+    data.append(city.c_no)
+    labels.append("NO")
+    fig, ax = plt.subplots()
+    ax.pie(data, labels=labels)
+    ax.axis('equal')
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart':chart})

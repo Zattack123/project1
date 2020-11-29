@@ -3,32 +3,37 @@ from django.db import models
 # Create your models here.
 
 class City(models.Model):
-    name = models.CharField(max_length=30)
-    state = models.CharField(max_length=30)
-    lat = models.CharField(max_length=30)
-    long = models.CharField(max_length=30)
-    date = models.CharField(max_length=30)
-    regmark = models.CharField(max_length=30)
-    temp = models.DecimalField(max_digits = 7, decimal_places=2)
-    humidity = models.DecimalField(max_digits = 7, decimal_places=4)
-    wind_speed = models.DecimalField(max_digits = 7, decimal_places=4)
-    wind_direction = models.CharField(max_length=30)
-    speed = models.DecimalField(max_digits = 7, decimal_places=6)
-    accuracy = models.DecimalField(max_digits = 7, decimal_places=6)
-    c_co = models.DecimalField(max_digits = 7, decimal_places=6)
-    c_co2 = models.DecimalField(max_digits = 7, decimal_places=6)
-    c_hc = models.DecimalField(max_digits = 7, decimal_places=6)
-    c_no = models.DecimalField(max_digits = 7, decimal_places=6)
-    efco = models.DecimalField(max_digits = 7, decimal_places=6)
-    efhc = models.DecimalField(max_digits = 7, decimal_places=6)
-    efno = models.DecimalField(max_digits = 7, decimal_places=6)
+    name = models.CharField(max_length=30, default="")
+    state = models.CharField(max_length=30, default="")
+    lat = models.CharField(max_length=30, default="")
+    long = models.CharField(max_length=30, default="")
+    date = models.CharField(max_length=30, default="")
+    regmark = models.CharField(max_length=30, default="")
+    temp = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    humidity = models.DecimalField(max_digits = 7, decimal_places=4, default=0.0)
+    wind_speed = models.DecimalField(max_digits = 7, decimal_places=4, default=0.0)
+    wind_direction = models.CharField(max_length=30, default="")
+    speed = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    accuracy = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    max_c_co = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    min_c_co = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    max_c_co2 = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    min_c_co2 = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    max_c_hc = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    min_c_hc = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    max_c_no = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    min_c_no = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    efco = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    efhc = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    efno = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+
+
 
     class Meta:
         verbose_name_plural = "cities"
 
     def __str__(self):
         return self.name
-
 
 class Vehicle(models.Model):
     engine_family = models.CharField(max_length=30)
@@ -66,3 +71,32 @@ class PowerPlant(models.Model):
 
     def __str__(self):
         return self.name
+
+#class PollutionData(models.Model):
+#    city = models.ForeignKey(City, related_name='cityData', on_delete=models.CASCADE)
+#    vehicle = models.ForeignKey(Vehicle, related_name='vehicleData', on_delete=models.CASCADE)
+#    plant = models.ForeignKey(PowerPlant, related_name='plantData', on_delete=models.CASCADE)
+#    max_c_co = models.DecimalField(max_digits = 7, decimal_places=6)
+#    min_c_co = models.DecimalField(max_digits = 7, decimal_places=6)
+#    max_c_co2 = models.DecimalField(max_digits = 7, decimal_places=6)
+#    min_c_co2 = models.DecimalField(max_digits = 7, decimal_places=6)
+#    max_c_hc = models.DecimalField(max_digits = 7, decimal_places=6)
+#    min_c_hc = models.DecimalField(max_digits = 7, decimal_places=6)
+#    max_c_no = models.DecimalField(max_digits = 7, decimal_places=6)
+#    min_c_no = models.DecimalField(max_digits = 7, decimal_places=6)
+#    efco = models.DecimalField(max_digits = 7, decimal_places=6)
+#    efhc = models.DecimalField(max_digits = 7, decimal_places=6)
+#    efno = models.DecimalField(max_digits = 7, decimal_places=6)
+
+
+
+#class WeatherData(models.Model):
+#    location = models.ForeignKey(City, related_name='cityWeather', on_delete=models.CASCADE)
+#    date = models.CharField(max_length=30)
+#    regmark = models.CharField(max_length=30)
+#    temp = models.DecimalField(max_digits = 7, decimal_places=2)
+#    humidity = models.DecimalField(max_digits = 7, decimal_places=4)
+#    wind_speed = models.DecimalField(max_digits = 7, decimal_places=4)
+#    wind_direction = models.CharField(max_length=30)
+#    speed = models.DecimalField(max_digits = 7, decimal_places=6)
+#    accuracy = models.DecimalField(max_digits = 7, decimal_places=6)

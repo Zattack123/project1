@@ -26,10 +26,10 @@
       <th>Wind Speed</th>
       <th>Wind Direction</th>
       <th>Accuracy</th>
-      <th>C_CO</th>
-      <th>C_CO2</th>
-      <th>C_HC</th>
-      <th>C_NO</th>
+      <th>C_CO(Min/Max)</th>
+      <th>C_CO2(Min/Max)</th>
+      <th>C_HC(Min/Max)</th>
+      <th>C_NO(Min/Max)</th>
       <th>EFCO</th>
       <th>EFHC</th>
       <th>EFNO</th>
@@ -48,10 +48,10 @@
       <td>{{ city.wind_speed }}</td>
       <td>{{ city.wind_direction }}</td>
       <td>{{ city.accuracy }}</td>
-      <td>{{ city.c_co }}</td>
-      <td>{{ city.c_co2 }}</td>
-      <td>{{ city.c_hc }}</td>
-      <td>{{ city.c_no }}</td>
+      <td>{{ city.min_c_co }}/{{city.max_c_co}}</td>
+      <td>{{ city.min_c_co2 }}/{{city.max_c_co2}}</td>
+      <td>{{ city.min_c_hc }}/{{city.max_c_hc}}</td>
+      <td>{{ city.min_c_no }}/{{city.max_c_no}}</td>
       <td>{{ city.efco }}</td>
       <td>{{ city.efhc }}</td>
       <td>{{ city.efno }}</td>
