@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'rest_framework',
     'django_matplotlib',
+    'chartjs',
 
     'crispy_forms',
     'widget_tweaks',

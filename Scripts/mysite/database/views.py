@@ -1,13 +1,32 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView
-from django.db.models import Q
+from django.db.models import Q, Sum
+from django.http import JsonResponse
 
 from .models import City, Vehicle, PowerPlant
 from .utils import get_plot
 
+
+def pie_chart(request):
+    labels = []
+    data = []
+    queryset = City.objects.order_by('-c_co2')[:5]
+    for city in queryset:
+        labels.append(city.name)
+        data.append(city.c_co2)
+    return render(request, 'graph.html' ,{'labels':labels,'data':data})
+
+
+
 class GraphView(TemplateView):
     template_name = 'graph.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["qs"] = City.objects.all()
+        return context
 
     def graph_view(request):
         qs = City.objects.all;
