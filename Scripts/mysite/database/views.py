@@ -99,3 +99,23 @@ def pollution_concentration(request, pk):
     plt.title('Pollution Concentration for ' + city.name)
     chart = get_graph()
     return render(request, 'graph.html', {'chart':chart})
+
+
+
+
+def pm25_graph_line(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    cities = City.objects.filter(name=city.name).order_by('date')
+    x = [x.date for x in cities]
+    #x.sort(key = lambda t: t[1], reverse=True)
+    y = [y.max_pm_25 + y.min_pm_25 for y in cities]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('Pm2.5 Conectration for ' + city.name)
+    plt.plot(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Date")
+    plt.ylabel('PM2.5 (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
