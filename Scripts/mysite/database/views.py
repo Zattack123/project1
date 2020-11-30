@@ -66,7 +66,7 @@ def c02_graph(request):
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("City Name")
-    plt.ylabel('CO2')
+    plt.ylabel('CO2 (ppm)')
     plt.tight_layout();
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
@@ -81,7 +81,7 @@ def pm25_graph(request):
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("City Name")
-    plt.ylabel('PM2.5')
+    plt.ylabel('PM2.5 (ppm)')
     plt.tight_layout();
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})

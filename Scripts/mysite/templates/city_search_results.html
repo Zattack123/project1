@@ -9,6 +9,12 @@
 {% block content %}
   <h2> Cities </h2>
   <p>
+    <a href="{% url 'c02graph' %}" class="btn btn-primary" target="_blank">CO2 Graph</a>
+  </p>
+  <p>
+    <a href="{% url 'pm25graph' %}" class="btn btn-primary" target="_blank">PM2.5 Graph</a>
+  </p>
+  <p>
     <form action="{% url 'city_search_results' %}" method="get">
       <input name="q" type="text" placeholder="Search Cities">
     </form>
