@@ -61,7 +61,7 @@ def c02_graph(request):
     x = [x.name for x in qs]
     y = [y.max_c_co2 + y.min_c_co2 for y in qs]
     plt.switch_backend('AGG')
-    plt.figure(figsize=(10,5))
+    plt.figure(figsize=(5,3))
     plt.title('CO2 Conectration Per City')
     plt.bar(x,y)
     plt.xticks(rotation=45)
@@ -71,18 +71,32 @@ def c02_graph(request):
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
 
+def pm25_graph(request):
+    qs = City.objects.all();
+    x = [x.name for x in qs]
+    y = [y.max_pm_25 + y.min_pm_25 for y in qs]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('Pm2.5 Conectration Per City')
+    plt.bar(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("City Name")
+    plt.ylabel('PM2.5')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
 
 
 def pollution_concentration(request, pk):
     city = get_object_or_404(City, pk=pk)
     #city = City.objects.get(name='Lexington')[:0]
-    data = list((city.c_co))
+    data = list((city.max_c_co))
     labels = list(("CO"))
-    data.append(city.c_co2)
+    data.append(city.max_c_co2)
     labels.append("C02")
-    data.append(city.c_hc)
+    data.append(city.max_c_hc)
     labels.append("HC")
-    data.append(city.c_no)
+    data.append(city.max_c_no)
     labels.append("NO")
     fig, ax = plt.subplots()
     ax.pie(data, labels=labels)

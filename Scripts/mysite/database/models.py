@@ -23,6 +23,8 @@ class City(models.Model):
     min_c_hc = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
     max_c_no = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
     min_c_no = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    max_pm_25 = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    min_pm_25 = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)    
     efco = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
     efhc = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
     efno = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
