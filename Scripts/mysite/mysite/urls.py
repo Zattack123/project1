@@ -71,7 +71,7 @@ urlpatterns = [
     url(r'^c02graph/', db_views.c02_graph, name='c02graph'),
     url(r'^pm25graph/', db_views.pm25_graph, name='pm25graph'),
 
-    #url(r'^concentration/(?P<pk>\d+)/', db_views.pollution_concentration, name='concentration')
+    url(r'^concentration/(?P<pk>\d+)/', db_views.pollution_concentration, name='concentration')
 
     #WIP
 #    url(r'^boards/(?P<board_pk>\d+)/topics/(?P<pk>\d+)', views.delete_topic, name='delete_topic'),

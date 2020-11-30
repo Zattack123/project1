@@ -90,16 +90,10 @@ def pm25_graph(request):
 def pollution_concentration(request, pk):
     city = get_object_or_404(City, pk=pk)
     #city = City.objects.get(name='Lexington')[:0]
-    data = list((city.max_c_co))
-    labels = list(("CO"))
-    data.append(city.max_c_co2)
-    labels.append("C02")
-    data.append(city.max_c_hc)
-    labels.append("HC")
-    data.append(city.max_c_no)
-    labels.append("NO")
+    data = [city.max_c_co, city.max_c_co2, city.max_c_hc, city.max_c_no]
+    labels = "CO", "C02", "HC", "NO"
     fig, ax = plt.subplots()
-    ax.pie(data, labels=labels)
+    ax.pie(data, labels=labels, autopct='%1.1f%%')
     ax.axis('equal')
     chart = get_graph()
     return render(request, 'graph.html', {'chart':chart})
