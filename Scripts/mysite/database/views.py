@@ -145,11 +145,9 @@ def all_pollution(request, pk):
     x5 = [x5.date for x5 in dates]
     y5 = [y5.max_pm_25 + y5.min_pm_25 for y5 in dates]
     plt.plot(x5, y5, label="PM25")
-
-
     plt.xticks(rotation=45)
     plt.xlabel("Time")
-    plt.ylabel('Concentration')
+    plt.ylabel('Concentration (ppm)')
     plt.legend()
     plt.tight_layout();
     chart = get_graph()
