@@ -46,12 +46,12 @@
     <tr>
       <td>
         <p>{{ city.name }}</p>
-      <small>
-        <a href="{% url 'concentration' city.pk %}" target="_blank">3</a>
-        <a href="{% url 'pm25graphline' city.pk %}" target="_blank">4</a>
-        <a href="{% url 'pm25windgraph' city.pk %}" target="_blank">9</a>
+      <medium>
+        <a href="{% url 'concentration' city.pk %}" target="_blank">3,</a>
+        <a href="{% url 'pm25graphline' city.pk %}" target="_blank">4,</a>
+        <a href="{% url 'pm25windgraph' city.pk %}" target="_blank">8</a>
 
-      </small>
+      </medium>
       </td>
       <td>{{ city.state }}</td>
       <td>{{ city.date }}</td>
