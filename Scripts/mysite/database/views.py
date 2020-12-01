@@ -74,7 +74,6 @@ def c02_graph(request):
 
 def pollution_concentration_pie(request, pk):
     city = get_object_or_404(City, pk=pk)
-    #city = City.objects.get(name='Lexington')[:0]
     data = [city.max_c_co + city.min_c_co, city.max_c_co2 + city.min_c_co2,
         city.max_c_hc + city.min_c_hc, city.max_c_no + city.min_c_no, city.max_pm_25 + city.min_pm_25]
     labels = "CO", "C02", "HC", "NO", "PM25"
