@@ -70,7 +70,7 @@ urlpatterns = [
 
     url(r'^c02graph/', db_views.c02_graph, name='c02graph'),
 
-    url(r'^concentration/(?P<pk>\d+)/', db_views.pollution_concentration, name='concentration'),
+    url(r'^pieconcentration/(?P<pk>\d+)/', db_views.pollution_concentration_pie, name='pieconcentration'),
     url(r'^pm25graphline/(?P<pk>\d+)/', db_views.pm25_graph_line, name='pm25graphline'),
     url(r'^c0graphline/(?P<pk>\d+)/', db_views.c0_graph_line, name='c0graphline'),
     url(r'^c02graphline/(?P<pk>\d+)/', db_views.c02_graph_line, name='c02graphline'),

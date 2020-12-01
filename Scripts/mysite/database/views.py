@@ -29,7 +29,7 @@ class CitySearchResultsView(ListView):
         query = self.request.GET.get('q', '')
         object_list = City.objects.filter(
             Q(name__icontains=query) | Q(state__icontains=query) | Q(date__icontains=query)
-        )
+        ).order_by("date")
         return object_list
 
 class VehicleSearchResultsView(ListView):
@@ -72,7 +72,7 @@ def c02_graph(request):
     return render(request, 'graph.html', {'chart': chart})
 
 
-def pollution_concentration(request, pk):
+def pollution_concentration_pie(request, pk):
     city = get_object_or_404(City, pk=pk)
     #city = City.objects.get(name='Lexington')[:0]
     data = [city.max_c_co + city.min_c_co, city.max_c_co2 + city.min_c_co2,
