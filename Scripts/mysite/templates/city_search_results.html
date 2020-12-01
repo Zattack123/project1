@@ -47,9 +47,10 @@
       <td>
         <p>{{ city.name }}</p>
       <medium>
-        <a href="{% url 'concentration' city.pk %}" target="_blank">Pie</a>
-        <a href="{% url 'pm25graphline' city.pk %}" target="_blank">Concentration</a>
-        <a href="{% url 'pm25windgraph' city.pk %}" target="_blank">Wind</a>
+        <a href="{% url 'concentration' city.pk %}" target="_blank">Pie,</a>
+        <a href="{% url 'pm25graphline' city.pk %}" target="_blank">PM2.5 Concentration,</a>
+        <a href="{% url 'pm25windgraph' city.pk %}" target="_blank">Wind,</a>
+        <a href="{% url 'allconcentration' city.pk %}" target="_blank">All,</a>
 
       </medium>
       </td>

@@ -88,9 +88,9 @@ def pollution_concentration(request, pk):
 
 def pm25_graph_line(request, pk):
     city = get_object_or_404(City, pk=pk)
-    cities = City.objects.filter(name=city.name).order_by('date')
-    x = [x.date for x in cities]
-    y = [y.max_pm_25 + y.min_pm_25 for y in cities]
+    dates = City.objects.filter(name=city.name).order_by('date')
+    x = [x.date for x in dates]
+    y = [y.max_pm_25 + y.min_pm_25 for y in dates]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
     plt.title('Pm2.5 Conectration for ' + city.name)
@@ -118,6 +118,43 @@ def wind_graph(request, pk):
     plt.tight_layout();
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
+
+
+def all_pollution(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    dates = City.objects.filter(name=city.name).order_by('date')
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(8,5))
+    plt.title('Pollution Conectration in ' + city.name)
+    x1 = [x1.date for x1 in dates]
+    y1 = [y1.max_c_co + y1.min_c_co for y1 in dates]
+    plt.plot(x1, y1, label="CO")
+
+    x2 = [x2.date for x2 in dates]
+    y2 = [y2.max_c_co2 + y2.min_c_co2 for y2 in dates]
+    plt.plot(x2, y2, label="CO2")
+
+    x3 = [x3.date for x3 in dates]
+    y3 = [y3.max_c_hc + y3.min_c_hc for y3 in dates]
+    plt.plot(x3, y3, label="HC")
+
+    x4 = [x4.date for x4 in dates]
+    y4 = [y4.max_c_no + y4.min_c_no for y4 in dates]
+    plt.plot(x4, y4, label="NO")
+
+    x5 = [x5.date for x5 in dates]
+    y5 = [y5.max_pm_25 + y5.min_pm_25 for y5 in dates]
+    plt.plot(x5, y5, label="PM25")
+
+
+    plt.xticks(rotation=45)
+    plt.xlabel("Time")
+    plt.ylabel('Concentration')
+    plt.legend()
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
 
 
 
