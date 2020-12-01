@@ -48,10 +48,7 @@
         <p>{{ city.name }}</p>
       <medium>
         <a href="{% url 'concentration' city.pk %}" target="_blank">Pie,</a>
-        <a href="{% url 'pm25graphline' city.pk %}" target="_blank">PM2.5 Concentration,</a>
-        <a href="{% url 'pm25windgraph' city.pk %}" target="_blank">Wind,</a>
-        <a href="{% url 'allconcentration' city.pk %}" target="_blank">All,</a>
-
+        <a href="{% url 'allconcentration' city.pk %}" target="_blank">All</a>
       </medium>
       </td>
       <td>{{ city.state }}</td>
@@ -61,11 +58,39 @@
       <td>{{ city.wind_speed }}</td>
       <td>{{ city.wind_direction }}</td>
       <td>{{ city.accuracy }}</td>
-      <td>{{ city.min_c_co }}/{{city.max_c_co}}</td>
-      <td>{{ city.min_c_co2 }}/{{city.max_c_co2}}</td>
-      <td>{{ city.min_c_hc }}/{{city.max_c_hc}}</td>
-      <td>{{ city.min_c_no }}/{{city.max_c_no}}</td>
-      <td>{{ city.min_pm_25 }}/{{city.max_pm_25}}</td>
+
+      <td>
+        <p>{{ city.min_c_co }}/{{city.max_c_co}}<p>
+          <medium>
+            <a href="{% url 'c0windgraph' city.pk %}" target="_blank">Wind</a>
+          </medium>
+      </td>
+
+      <td>
+        <p>{{ city.min_c_co2 }}/{{city.max_c_co2}}</p>
+        <medium>
+          <a href="{% url 'c02windgraph' city.pk %}" target="_blank">Wind</a>
+        </medium>
+      </td>
+
+      <td>
+        <p>{{ city.min_c_hc }}/{{city.max_c_hc}}</p>
+        <medium>
+        </medium>
+      </td>
+
+      <td>
+        <p>{{ city.min_c_no }}/{{city.max_c_no}}</p>
+        <medium>
+        </medium>
+      </td>
+      <td>
+        <p>{{ city.min_pm_25 }}/{{city.max_pm_25}}</p>
+        <medium>
+          <a href="{% url 'pm25windgraph' city.pk %}" target="_blank">Wind</a>
+          <a href="{% url 'pm25graphline' city.pk %}" target="_blank">Concentration</a>
+        </medium>
+      </td>
       <td>{{ city.efco }}</td>
       <td>{{ city.efhc }}</td>
       <td>{{ city.efno }}</td>

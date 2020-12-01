@@ -103,7 +103,7 @@ def pm25_graph_line(request, pk):
     return render(request, 'graph.html', {'chart': chart})
 
 
-def wind_graph(request, pk):
+def pm25_wind_graph(request, pk):
     city = get_object_or_404(City, pk=pk)
     wind = City.objects.filter(name=city.name).order_by('wind_direction')
     x = [x.wind_direction for x in wind]
@@ -119,6 +119,38 @@ def wind_graph(request, pk):
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
 
+
+def c02_wind_graph(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    wind = City.objects.filter(name=city.name).order_by('wind_direction')
+    x = [x.wind_direction for x in wind]
+    y = [y.max_c_co2 + y.min_c_co2 for y in wind]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('C02 Conectration by Wind Direction in ' + city.name)
+    plt.bar(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Wind Direction")
+    plt.ylabel('C02 (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
+def c0_wind_graph(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    wind = City.objects.filter(name=city.name).order_by('wind_direction')
+    x = [x.wind_direction for x in wind]
+    y = [y.max_c_co + y.min_c_co for y in wind]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('C0 Conectration by Wind Direction in ' + city.name)
+    plt.bar(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Wind Direction")
+    plt.ylabel('C0 (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
 
 def all_pollution(request, pk):
     city = get_object_or_404(City, pk=pk)
