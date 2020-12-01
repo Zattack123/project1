@@ -12,9 +12,6 @@
     <a href="{% url 'c02graph' %}" class="btn btn-primary" target="_blank">CO2 Graph</a>
   </p>
   <p>
-    <a href="{% url 'pm25graph' %}" class="btn btn-primary" target="_blank">PM2.5 Graph</a>
-  </p>
-  <p>
     <form action="{% url 'city_search_results' %}" method="get">
       <input name="q" type="text" placeholder="Search Cities">
     </form>
@@ -47,7 +44,15 @@
   <tbody>
     {% for city in object_list %}
     <tr>
-      <td>{{ city.name }}</td>
+      <td>
+        <p>{{ city.name }}</p>
+      <small>
+        <a href="{% url 'concentration' city.pk %}" target="_blank">3</a>
+        <a href="{% url 'pm25graphline' city.pk %}" target="_blank">4</a>
+        <a href="{% url 'pm25windgraph' city.pk %}" target="_blank">9</a>
+
+      </small>
+      </td>
       <td>{{ city.state }}</td>
       <td>{{ city.date }}</td>
       <td>{{ city.temp }}</td>

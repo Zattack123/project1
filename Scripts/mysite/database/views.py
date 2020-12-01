@@ -71,21 +71,6 @@ def c02_graph(request):
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
 
-def pm25_graph(request):
-    qs = City.objects.all();
-    x = [x.name for x in qs]
-    y = [y.max_pm_25 + y.min_pm_25 for y in qs]
-    plt.switch_backend('AGG')
-    plt.figure(figsize=(5,3))
-    plt.title('Pm2.5 Conectration Per City')
-    plt.bar(x,y)
-    plt.xticks(rotation=45)
-    plt.xlabel("City Name")
-    plt.ylabel('PM2.5 (ppm)')
-    plt.tight_layout();
-    chart = get_graph()
-    return render(request, 'graph.html', {'chart': chart})
-
 
 def pollution_concentration(request, pk):
     city = get_object_or_404(City, pk=pk)
@@ -101,13 +86,10 @@ def pollution_concentration(request, pk):
     return render(request, 'graph.html', {'chart':chart})
 
 
-
-
 def pm25_graph_line(request, pk):
     city = get_object_or_404(City, pk=pk)
     cities = City.objects.filter(name=city.name).order_by('date')
     x = [x.date for x in cities]
-    #x.sort(key = lambda t: t[1], reverse=True)
     y = [y.max_pm_25 + y.min_pm_25 for y in cities]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
@@ -119,3 +101,29 @@ def pm25_graph_line(request, pk):
     plt.tight_layout();
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
+
+
+def wind_graph(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    wind = City.objects.filter(name=city.name).order_by('wind_direction')
+    x = [x.wind_direction for x in wind]
+    y = [y.max_pm_25 + y.min_pm_25 for y in wind]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('Pm2.5 Conectration by Wind Direction in ' + city.name)
+    plt.bar(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Wind Direction")
+    plt.ylabel('PM2.5 (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
+
+
+
+#def box_plot(request, pk):
+#    city = get_object_or_404(City, pk=pk)
+#    cities = City.objects.filter(name=city.name).order_by('date')
+#    x = [x.date for x in cities]
+#    y = [y.]
