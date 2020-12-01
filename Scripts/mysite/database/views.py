@@ -72,6 +72,23 @@ def c02_graph(request):
     return render(request, 'graph.html', {'chart': chart})
 
 
+
+def vehicle_pm25_graph(request):
+    qs = Vehicle.objects.all();
+    x = [x.model_year + x.automaker + x.trim for x in qs]
+    y = [y.max_pm_25 + y.min_pm_25 for y in qs]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('PM25 Conectration Per Vehicle')
+    plt.bar(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Vehicle")
+    plt.ylabel('PM25 (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
+
 def pollution_concentration_pie(request, pk):
     city = get_object_or_404(City, pk=pk)
     data = [city.max_c_co + city.min_c_co, city.max_c_co2 + city.min_c_co2,

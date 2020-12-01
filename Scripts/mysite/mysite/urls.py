@@ -69,6 +69,7 @@ urlpatterns = [
     url(r'database/powerplant/', db_views.PowerPlantSearchResultsView.as_view(), name='powerplant_search_results'),
 
     url(r'^c02graph/', db_views.c02_graph, name='c02graph'),
+    url(r'^vehiclepm25/', db_views.vehicle_pm25_graph, name='vehiclepm25'),
 
     url(r'^pieconcentration/(?P<pk>\d+)/', db_views.pollution_concentration_pie, name='pieconcentration'),
     url(r'^pm25graphline/(?P<pk>\d+)/', db_views.pm25_graph_line, name='pm25graphline'),

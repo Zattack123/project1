@@ -9,6 +9,9 @@
 {% block content %}
   <h2> Vehicles </h2>
   <p>
+    <a href="{% url 'vehiclepm25' %}" class="btn btn-primary" target="_blank">PM25 Graph</a>
+  </p>
+  <p>
     <form action="{% url 'vehicle_search_results' %}" method="get">
       <input name="q" type="text" placeholder="Search Vehicles">
     </form>
@@ -17,8 +20,10 @@
   <table class="table mb-0">
     <thead>
       <tr>
+        <th>Model Year</th>
         <th>Automaker</th>
         <th>Trim</th>
+        <th>Pm2.5(Min/Max)</th>
         <th>Engine Family</th>
         <th>Engine Code</th>
         <th>Engine Model</th>
@@ -26,15 +31,16 @@
         <th>Part Name</th>
         <th>Part Description</th>
         <th>Part Number</th>
-        <th>Model Year</th>
         <th>Sensor</th>
       </tr>
     </thead>
     <tbody>
       {% for vehicle in object_list %}
       <tr>
+        <td>{{ vehicle.model_year }}</td>
         <td>{{ vehicle.automaker }}</td>
         <td>{{ vehicle.trim }}</td>
+        <td>{{ vehicle.min_pm_25 }}/{{ vehicle.max_pm_25 }}</td>
         <td>{{ vehicle.engine_family }}</td>
         <td>{{ vehicle.engine_code }}</td>
         <td>{{ vehicle.engine_model }}</td>
@@ -42,7 +48,6 @@
         <td>{{ vehicle.part_name }}</td>
         <td>{{ vehicle.part_desc }}</td>
         <td>{{ vehicle.part_num }}</td>
-        <td>{{ vehicle.model_year }}</td>
         <td>{{ vehicle.sensor }}</td>
       </tr>
       {% endfor %}

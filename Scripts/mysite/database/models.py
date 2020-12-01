@@ -49,6 +49,8 @@ class Vehicle(models.Model):
     trim = models.CharField(max_length=30)
     model_year = models.CharField(max_length=10)
     sensor = models.BooleanField(default=False)
+    max_pm_25 = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
+    min_pm_25 = models.DecimalField(max_digits = 7, decimal_places=2, default=0.0)
 
     class Meta:
         verbose_name_plural = "vehicles"
