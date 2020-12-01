@@ -102,6 +102,71 @@ def pm25_graph_line(request, pk):
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
 
+def c0_graph_line(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    dates = City.objects.filter(name=city.name).order_by('date')
+    x = [x.date for x in dates]
+    y = [y.max_c_co + y.min_c_co for y in dates]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('C0 Conectration for ' + city.name)
+    plt.plot(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Date")
+    plt.ylabel('C0 (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
+def c02_graph_line(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    dates = City.objects.filter(name=city.name).order_by('date')
+    x = [x.date for x in dates]
+    y = [y.max_c_co2 + y.min_c_co2 for y in dates]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('C02 Conectration for ' + city.name)
+    plt.plot(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Date")
+    plt.ylabel('C02 (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
+def hc_graph_line(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    dates = City.objects.filter(name=city.name).order_by('date')
+    x = [x.date for x in dates]
+    y = [y.max_c_hc + y.min_c_hc for y in dates]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('HC Conectration for ' + city.name)
+    plt.plot(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Date")
+    plt.ylabel('HC (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
+def no_graph_line(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    dates = City.objects.filter(name=city.name).order_by('date')
+    x = [x.date for x in dates]
+    y = [y.max_c_no + y.min_c_no for y in dates]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('NO Conectration for ' + city.name)
+    plt.plot(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Date")
+    plt.ylabel('NO (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
+
 
 def pm25_wind_graph(request, pk):
     city = get_object_or_404(City, pk=pk)
@@ -135,6 +200,41 @@ def c02_wind_graph(request, pk):
     plt.tight_layout();
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
+
+
+def hc_wind_graph(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    wind = City.objects.filter(name=city.name).order_by('wind_direction')
+    x = [x.wind_direction for x in wind]
+    y = [y.max_c_hc + y.min_c_hc for y in wind]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('HC Conectration by Wind Direction in ' + city.name)
+    plt.bar(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Wind Direction")
+    plt.ylabel('HC (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
+
+def no_wind_graph(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    wind = City.objects.filter(name=city.name).order_by('wind_direction')
+    x = [x.wind_direction for x in wind]
+    y = [y.max_c_no + y.min_c_no for y in wind]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.title('NO Conectration by Wind Direction in ' + city.name)
+    plt.bar(x,y)
+    plt.xticks(rotation=45)
+    plt.xlabel("Wind Direction")
+    plt.ylabel('NO (ppm)')
+    plt.tight_layout();
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart': chart})
+
 
 def c0_wind_graph(request, pk):
     city = get_object_or_404(City, pk=pk)

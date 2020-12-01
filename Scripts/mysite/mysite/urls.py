@@ -72,9 +72,16 @@ urlpatterns = [
 
     url(r'^concentration/(?P<pk>\d+)/', db_views.pollution_concentration, name='concentration'),
     url(r'^pm25graphline/(?P<pk>\d+)/', db_views.pm25_graph_line, name='pm25graphline'),
+    url(r'^c0graphline/(?P<pk>\d+)/', db_views.c0_graph_line, name='c0graphline'),
+    url(r'^c02graphline/(?P<pk>\d+)/', db_views.c02_graph_line, name='c02graphline'),
+    url(r'^hcgraphline/(?P<pk>\d+)/', db_views.hc_graph_line, name='hcgraphline'),
+    url(r'^nographline/(?P<pk>\d+)/', db_views.no_graph_line, name='nographline'),
+
     url(r'^pm25windgraph/(?P<pk>\d+)/', db_views.pm25_wind_graph, name='pm25windgraph'),
     url(r'^c0windgraph/(?P<pk>\d+)/', db_views.c0_wind_graph, name='c0windgraph'),
     url(r'^c02windgraph/(?P<pk>\d+)/', db_views.c02_wind_graph, name='c02windgraph'),
+    url(r'^hcwindgraph/(?P<pk>\d+)/', db_views.hc_wind_graph, name='hcwindgraph'),
+    url(r'^nowindgraph/(?P<pk>\d+)/', db_views.no_wind_graph, name='nowindgraph'),
     url(r'^allconcentration/(?P<pk>\d+)/', db_views.all_pollution, name='allconcentration')
 
     #WIP

@@ -63,6 +63,7 @@
         <p>{{ city.min_c_co }}/{{city.max_c_co}}<p>
           <medium>
             <a href="{% url 'c0windgraph' city.pk %}" target="_blank">Wind</a>
+            <a href="{% url 'c0graphline' city.pk %}" target="_blank">Concentration</a>
           </medium>
       </td>
 
@@ -70,18 +71,23 @@
         <p>{{ city.min_c_co2 }}/{{city.max_c_co2}}</p>
         <medium>
           <a href="{% url 'c02windgraph' city.pk %}" target="_blank">Wind</a>
+          <a href="{% url 'c02graphline' city.pk %}" target="_blank">Concentration</a>
         </medium>
       </td>
 
       <td>
         <p>{{ city.min_c_hc }}/{{city.max_c_hc}}</p>
         <medium>
+          <a href="{% url 'hcwindgraph' city.pk %}" target="_blank">Wind</a>
+          <a href="{% url 'hcgraphline' city.pk %}" target="_blank">Concentration</a>
         </medium>
       </td>
 
       <td>
         <p>{{ city.min_c_no }}/{{city.max_c_no}}</p>
         <medium>
+          <a href="{% url 'nowindgraph' city.pk %}" target="_blank">Wind</a>
+          <a href="{% url 'nographline' city.pk %}" target="_blank">Concentration</a>
         </medium>
       </td>
       <td>
