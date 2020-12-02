@@ -75,7 +75,7 @@ def c02_graph(request):
 
 def vehicle_pm25_graph(request):
     qs = Vehicle.objects.all();
-    x = [x.model_year + x.automaker + x.trim for x in qs]
+    x = [x.model_year + ' ' + x.automaker + ' ' + x.trim for x in qs]
     y = [y.max_pm_25 + y.min_pm_25 for y in qs]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
