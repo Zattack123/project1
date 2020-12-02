@@ -101,6 +101,40 @@ def pollution_concentration_pie(request, pk):
     chart = get_graph()
     return render(request, 'graph.html', {'chart':chart})
 
+def bar_graph(request, pk):
+    city = get_object_or_404(City, pk=pk)
+    dates = City.objects.filter(name=city.name).order_by('date')
+    datesList = [z.date for z in dates]
+    width = .2
+    c0 = [x1.max_c_co + x1.min_c_co for x1 in dates]
+    c02 = [x2.max_c_co2 + x2.min_c_co2 for x2 in dates]
+    hc = [x3.max_c_hc + x3.min_c_hc for x3 in dates]
+    no = [x4.max_c_no + x4.min_c_no for x4 in dates]
+    pm25 = [x5.max_pm_25 + x5.min_pm_25 for x5 in dates]
+
+    labels = 'C0', 'C02', 'HC', 'NO', 'PM25'
+    y1 = np.arange(len(c0))
+    y2 = [x + width for x in y1]
+    y3 = [x + width for x in y2]
+    y4 = [x + width for x in y3]
+    y5 = [x + width for x in y4]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(5,3))
+    plt.bar(y1, c0, width=width, edgecolor='white', label='CO')
+    plt.bar(y2, c02, width=width, edgecolor='white',label='CO2')
+    plt.bar(y3, hc, width=width, edgecolor='white', label='HC')
+    plt.bar(y4, no, width=width, edgecolor='white', label='NO')
+    plt.bar(y5, pm25, width=width, edgecolor='white', label='PM25')
+
+    plt.xlabel('Time')
+    plt.xticks([r + width for r in range(len(c0))], datesList)
+
+    plt.title('Bar Graph')
+    plt.tight_layout();
+    plt.legend()
+    chart = get_graph()
+    return render(request, 'graph.html', {'chart':chart})
+
 
 def pm25_graph_line(request, pk):
     city = get_object_or_404(City, pk=pk)
@@ -109,7 +143,7 @@ def pm25_graph_line(request, pk):
     y = [y.max_pm_25 + y.min_pm_25 for y in dates]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('Pm2.5 Conectration for ' + city.name)
+    plt.title('Pm2.5 Concentration for ' + city.name)
     plt.plot(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Date")
@@ -125,7 +159,7 @@ def c0_graph_line(request, pk):
     y = [y.max_c_co + y.min_c_co for y in dates]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('C0 Conectration for ' + city.name)
+    plt.title('C0 Concentration for ' + city.name)
     plt.plot(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Date")
@@ -141,7 +175,7 @@ def c02_graph_line(request, pk):
     y = [y.max_c_co2 + y.min_c_co2 for y in dates]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('C02 Conectration for ' + city.name)
+    plt.title('C02 Concentration for ' + city.name)
     plt.plot(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Date")
@@ -157,7 +191,7 @@ def hc_graph_line(request, pk):
     y = [y.max_c_hc + y.min_c_hc for y in dates]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('HC Conectration for ' + city.name)
+    plt.title('HC Concentration for ' + city.name)
     plt.plot(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Date")
@@ -173,7 +207,7 @@ def no_graph_line(request, pk):
     y = [y.max_c_no + y.min_c_no for y in dates]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('NO Conectration for ' + city.name)
+    plt.title('NO Concentration for ' + city.name)
     plt.plot(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Date")
@@ -191,7 +225,7 @@ def pm25_wind_graph(request, pk):
     y = [y.max_pm_25 + y.min_pm_25 for y in wind]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('Pm2.5 Conectration by Wind Direction in ' + city.name)
+    plt.title('Pm2.5 Concentration by Wind Direction in ' + city.name)
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Wind Direction")
@@ -208,7 +242,7 @@ def c02_wind_graph(request, pk):
     y = [y.max_c_co2 + y.min_c_co2 for y in wind]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('C02 Conectration by Wind Direction in ' + city.name)
+    plt.title('C02 Concentration by Wind Direction in ' + city.name)
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Wind Direction")
@@ -225,7 +259,7 @@ def hc_wind_graph(request, pk):
     y = [y.max_c_hc + y.min_c_hc for y in wind]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('HC Conectration by Wind Direction in ' + city.name)
+    plt.title('HC Concentration by Wind Direction in ' + city.name)
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Wind Direction")
@@ -242,7 +276,7 @@ def no_wind_graph(request, pk):
     y = [y.max_c_no + y.min_c_no for y in wind]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('NO Conectration by Wind Direction in ' + city.name)
+    plt.title('NO Concentration by Wind Direction in ' + city.name)
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Wind Direction")
@@ -259,7 +293,7 @@ def c0_wind_graph(request, pk):
     y = [y.max_c_co + y.min_c_co for y in wind]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('C0 Conectration by Wind Direction in ' + city.name)
+    plt.title('C0 Concentration by Wind Direction in ' + city.name)
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Wind Direction")
@@ -273,7 +307,7 @@ def all_pollution(request, pk):
     dates = City.objects.filter(name=city.name).order_by('date')
     plt.switch_backend('AGG')
     plt.figure(figsize=(8,5))
-    plt.title('Pollution Conectration in ' + city.name)
+    plt.title('Pollution Concentration in ' + city.name)
     x1 = [x1.date for x1 in dates]
     y1 = [y1.max_c_co + y1.min_c_co for y1 in dates]
     plt.plot(x1, y1, label="CO")
