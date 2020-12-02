@@ -13,9 +13,9 @@ To install, download the project1 folder and place it where you keep python file
 Follow these steps to activate the site
 Steps:
 1. Open a Command Terminal
-2. Navigate to the Scripts folder (project1/Scripts)
+2. Navigate to the Scripts folder (project3/Scripts)
 3. Run .\activate in the Scripts folder to activate the virtual environment
-4. Navigate to the mysite folder (project1/Scripts/mysite)
+4. Navigate to the mysite folder (project3/Scripts/mysite)
 5. Run python manage.py runserver
 6. Open http://127.0.0.1:8000/ in your web browser to access the site
 
@@ -33,5 +33,8 @@ Users can also view a database of pollution data divided into Cities, Vehicles, 
   Cities: Name, State, and Database
   Vehicles: Automaker and Trim
   Power Plants: Name and State
+
+On the Database page, there are various buttons to display graphs that correspond to the data
+
 
 Alongside the Files button, are two buttons that link to the World Health Organization main site, as well as their page for Air Pollution.
