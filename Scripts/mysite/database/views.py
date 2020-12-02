@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q, Sum
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse, Http404, HttpResponse
 from django.urls import reverse
 
 
@@ -62,7 +62,7 @@ def c02_graph(request):
     y = [y.max_c_co2 + y.min_c_co2 for y in qs]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('CO2 Conectration Per City')
+    plt.title('CO2 Concentration Per City')
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("City Name")
@@ -79,7 +79,7 @@ def vehicle_pm25_graph(request):
     y = [y.max_pm_25 + y.min_pm_25 for y in qs]
     plt.switch_backend('AGG')
     plt.figure(figsize=(5,3))
-    plt.title('PM25 Conectration Per Vehicle')
+    plt.title('PM25 Concentration Per Vehicle')
     plt.bar(x,y)
     plt.xticks(rotation=45)
     plt.xlabel("Vehicle")
@@ -335,7 +335,20 @@ def all_pollution(request, pk):
     chart = get_graph()
     return render(request, 'graph.html', {'chart': chart})
 
+@login_required
+def db_upload(request):
+    if request.method == 'POST':
+        form = FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Successful")
+            #redirect('db_upload')
+    return HttpResponse("Failed")
 
+def handle_uploaded_file(file, filename):
+    for s in file.read().split(','):
+        myobject = MyModel(fileData=s)
+        myobject.save()
 
 
 
