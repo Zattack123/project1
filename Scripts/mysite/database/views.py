@@ -97,7 +97,7 @@ def pollution_concentration_pie(request, pk):
     fig, ax = plt.subplots()
     ax.pie(data, labels=labels, autopct='%1.1f%%')
     ax.axis('equal')
-    plt.title('Pollution Concentration for ' + city.name)
+    plt.title('Particulate Concentration for ' + city.name + ' on ' + city.date)
     chart = get_graph()
     return render(request, 'graph.html', {'chart':chart})
 
@@ -105,7 +105,7 @@ def bar_graph(request, pk):
     city = get_object_or_404(City, pk=pk)
     dates = City.objects.filter(name=city.name).order_by('date')
     datesList = [z.date for z in dates]
-    width = .2
+    width = .1
     c0 = [x1.max_c_co + x1.min_c_co for x1 in dates]
     c02 = [x2.max_c_co2 + x2.min_c_co2 for x2 in dates]
     hc = [x3.max_c_hc + x3.min_c_hc for x3 in dates]
@@ -127,9 +127,9 @@ def bar_graph(request, pk):
     plt.bar(y5, pm25, width=width, edgecolor='white', label='PM25')
 
     plt.xlabel('Time')
-    plt.xticks([r + width for r in range(len(c0))], datesList)
+    plt.xticks([r + width*2 for r in range(len(c0))], datesList)
 
-    plt.title('Bar Graph')
+    plt.title('Particulate concentration by date')
     plt.tight_layout();
     plt.legend()
     chart = get_graph()
