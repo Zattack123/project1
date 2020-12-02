@@ -3,17 +3,12 @@ FILE: upload_file.html
 Zach Dilliha, Tyler Clark, WKU 2020
 CS 396
 
-This page contains the form that users use to upload files to the website
+This page contains the form that users use to upload files to the database
 -->
 
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
-
-{% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'file_list' %}">Files</a></li>
-  <li class="breadcrumb-item active">Upload</li>
-{% endblock %}
 
 {% block content %}
   <h2>Upload File</h2>

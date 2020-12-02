@@ -85,7 +85,9 @@ urlpatterns = [
     url(r'^nowindgraph/(?P<pk>\d+)/', db_views.no_wind_graph, name='nowindgraph'),
     url(r'^allconcentration/(?P<pk>\d+)/', db_views.all_pollution, name='allconcentration'),
 
-    url(r'^bargraph/(?P<pk>\d+)/', db_views.bar_graph, name='bargraph')
+    url(r'^bargraph/(?P<pk>\d+)/', db_views.bar_graph, name='bargraph'),
+
+    #url(r'^dbupload/$', db_views.db_upload, name='db_upload')
 
     #WIP
 #    url(r'^boards/(?P<board_pk>\d+)/topics/(?P<pk>\d+)', views.delete_topic, name='delete_topic'),
